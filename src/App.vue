@@ -1,17 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ChocolateItem
+      v-for="(chocolate, position) in chocolates" :key="position"
+      :msg="chocolate.name"
+      :position="position"/>
+    <h1>State chocolates</h1>
+    {{ state_chocolates }}
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ChocolateItem from './components/ChocoItem.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ChocolateItem
+  },
+  computed: {
+    chocolates() {
+      return this.$store.getters['getChocolates'];
+    },
+    state_chocolates() {
+      return this.$store.state.chocolates;
+    },
   }
 }
 </script>
